@@ -1,6 +1,8 @@
 import pandas as pd
-import quandl
-import math
+import quandl, math
+import numpy as np
+from sklearn import preprocessing, cross_validation, svm
+from sklearn.linear_model import LinearRegression
 
 df = quandl.get("WIKI/GOOGL")
 
@@ -21,3 +23,11 @@ df['label'] = df[forecast_col].shift(-forecast_out)
 
 print(df.head())
 #tutorial 3 done
+
+#features are X
+#drops label and converts in numpy array
+X = np.array(df.drop(['label',1]))
+#labels are y
+y = np.array(df(['label']))
+
+X = preprocessing.scale(X)
